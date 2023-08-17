@@ -1,0 +1,256 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    --paragh-: #6a88a3;
+}
+
+body{
+    height: 100vh;
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: row-reverse;
+    background: linear-gradient(to bottom, rgb(1, 69, 129), rgb(0, 27, 50));
+}
+
+.weather{
+    position: fixed;
+    z-index: -999;
+    background: linear-gradient(0deg, #00000052, #00000052), url(../images/closeup-shot-wet-glass-reflecting-rainy-forest-scenery.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    transition: 1s;
+}
+
+.rainy{
+    opacity: 0;
+}
+
+.cloud{
+    background: linear-gradient(0deg, #00000052, #00000052), url(../images/cloudy-sky-landscape-wallpaper.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+}
+
+.clear{
+    background: linear-gradient(0deg, #00000052, #00000052), url(../images/nature-colorful-landscape-dusk-cloud.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+}
+
+.mists{
+    background: linear-gradient(0deg, #00000052, #00000052), url(../images/cloudy-sky-mountains.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+}
+
+.storms{
+    background: linear-gradient(0deg, #00000052, #00000052), url(../images/lightning-storm-maldives.jpg);
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+}
+
+
+body.clouds .cloud{
+    opacity: 1;
+}
+
+body.rain .rainy{
+    opacity: 1;
+}
+
+body.clears .clear{
+    opacity: 1;
+    z-index: -999;
+}
+
+body.storm .storms{
+    opacity: 1;
+}
+
+body.mist .mists{
+    opacity: 1;
+}
+
+.nav{
+    width: 40%;
+    height: 100%;
+    background: #0000007a;
+    -webkit-backdrop-filter: blur(1rem);
+    backdrop-filter: blur(1.2rem);
+}
+
+nav{
+    padding: 1em 2em;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.search{
+    position: relative;
+}
+
+.search input{
+    padding: 1em;
+    font-size: 1.2rem;
+    outline: none;
+    border: none;
+    background: none;
+    color: white;
+    width: 100%;
+    border-bottom: 2px solid #6a9bca6f;
+}
+
+.label{
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    transform: translate(-2%, -50%);
+    color: var(--paragh-);
+    transition: .3s;
+    pointer-events: none;
+}
+
+.search i{
+    position: absolute;
+    font-size: 1.8rem;
+    top: 50%;
+    right: 1%;
+    transform: translate(-1%, -50%);
+    color: var(--paragh-);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.search input:focus,
+.search input:valid{
+    border-bottom: 2px solid #6a9cca;
+}
+
+.search input:focus ~ .label,
+.search input:valid ~ .label{
+    transform: translate(-2%, -50%) translateY(-35px);
+    font-size: .7rem;
+}
+
+.search input:valid ~ i.bx-search{
+    color: #a9d7ff;
+}
+
+.weather-detail-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 3em;
+}
+
+.weather-detail-container h3{
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.weather-details{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    width: 100%;
+}
+
+.weather-detail{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.weather-detail .percentage{
+    color: #a9d7ff;
+}
+
+.weather-detail p{
+    color: var(--paragh-);
+}
+
+.container{
+    width: 100%;
+    padding: 3em 2em 5em 4em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.head h1{
+    font-size: 4rem;
+    font-weight: 500;
+}
+
+.head p{
+    font-weight: 300;
+}
+
+.head p span{
+    font-size: 1.5rem;
+    color: #a9d7ff;
+}
+
+.digital-clock{
+    display: flex;
+    gap: .3em;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #a9d7ff;
+}
+
+.weather-info{
+    display: flex;
+    align-items: center;
+    gap: 5em;
+}
+
+.weather-info h1{
+    font-size: 7rem;
+    font-weight: 400;
+}
+
+.weather-info h2{
+    font-size: 3rem;
+    font-weight: 200;
+    color: #a9d7ff;
+}
+
+.weather-type{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.weather-type i{
+    font-size: 2rem;
+    color: #a9d7ff;
+}
+
+.weather-type h3{
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: #a9d7ff;
+}
+
