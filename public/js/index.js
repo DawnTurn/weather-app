@@ -75,6 +75,10 @@ async function checkWeather(cityName){
 
     if(data.weather[0].main == 'Clouds'){
         weatherLogo.classList.add('bx-cloud')
+        weatherLogo.classList.remove("bx-cloud-rain");
+        weatherLogo.classList.remove("bx-sun");
+        weatherLogo.classList.remove("bx-cloud-drizzle");
+        weatherLogo.classList.remove("bx-cloud-lightning");
         body.classList.add('clouds')
         body.classList.remove('rain')
         body.classList.remove("clears");
@@ -85,6 +89,10 @@ async function checkWeather(cityName){
 
     if(data.weather[0].main == 'Rain'){
         weatherLogo.classList.add("bx-cloud-rain");
+        weatherLogo.classList.remove("bx-cloud");
+        weatherLogo.classList.remove("bx-sun");
+        weatherLogo.classList.remove("bx-cloud-drizzle");
+        weatherLogo.classList.remove("bx-cloud-lightning");
         body.classList.add('rain')
         body.classList.remove('clouds')
         body.classList.remove("clears");
@@ -94,6 +102,10 @@ async function checkWeather(cityName){
 
     if (data.weather[0].main == "Clear") {
         weatherLogo.classList.add("bx-sun");
+        weatherLogo.classList.remove("bx-cloud");
+        weatherLogo.classList.remove("bx-cloud-rain");
+        weatherLogo.classList.remove("bx-cloud-lightning");
+        weatherLogo.classList.remove("bx-cloud-drizzle");
         body.classList.add('clears')
         body.classList.remove("rain");
         body.classList.remove("clouds");
@@ -103,6 +115,10 @@ async function checkWeather(cityName){
 
     if (data.weather[0].main == "Drizzle") {
         weatherLogo.classList.add("bx-cloud-drizzle");
+        weatherLogo.classList.remove("bx-cloud");
+        weatherLogo.classList.remove("bx-cloud-rain");
+        weatherLogo.classList.remove("bx-cloud-lightning");
+        weatherLogo.classList.remove("bx-sun");
         body.classList.add("rain");
         body.classList.remove("clouds");
         body.classList.remove("clear");
@@ -112,6 +128,10 @@ async function checkWeather(cityName){
 
     if (data.weather[0].main == "Mist") {
         weatherLogo.classList.add("bx-cloud");
+        weatherLogo.classList.remove("bx-cloud-rain");
+        weatherLogo.classList.remove("bx-cloud-lightning");
+        weatherLogo.classList.remove("bx-sun");
+        weatherLogo.classList.remove("bx-cloud-drizzle");
         body.classList.add('mist')
         body.classList.remove("rain");
         body.classList.remove("clouds");
@@ -121,6 +141,10 @@ async function checkWeather(cityName){
 
     if (data.weather[0].main == "Thunderstorm") {
         weatherLogo.classList.add("bx-cloud-lightning");
+        weatherLogo.classList.remove("bx-cloud-rain");
+        weatherLogo.classList.remove("bx-cloud");
+        weatherLogo.classList.remove("bx-sun");
+        weatherLogo.classList.remove("bx-cloud-drizzle");
         body.classList.add('storm')
         body.classList.remove('mist')
         body.classList.remove("rain");
