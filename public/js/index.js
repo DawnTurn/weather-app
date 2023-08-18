@@ -13,6 +13,7 @@ const search = document.querySelector('.bx-search')
 const weatherDesc = document.querySelector('.weather-desc')
 const body = document.querySelector('body')
 const weatherLogo = document.querySelector('.weather-type i')
+const desc = document.querySelector('.desc')
 
 setInterval(() => {
   let currentTime = new Date();
@@ -63,8 +64,6 @@ async function checkWeather(cityName){
     const response = await fetch(apiUrl + cityName + `&appid=${apiKey}`)
     let data = await response.json()
 
-    console.log(data)
-
     city.innerHTML = data.name
     temp.innerHTML = Math.round(data.main.temp) + "°C";
     humidity.innerHTML = data.main.humidity + '%'
@@ -72,6 +71,7 @@ async function checkWeather(cityName){
     cloud.innerHTML = data.clouds.all + '%'
     pressure.innerHTML = data.main.pressure + ' hPa'
     weatherDesc.innerHTML = data.weather[0].main
+    desc.innerHTML = data.weather[0].description
 
     if(data.weather[0].main == 'Clouds'){
         weatherLogo.classList.add('bx-cloud')
@@ -151,4 +151,18 @@ async function checkWeather(cityName){
         body.classList.remove("clouds");
         body.classList.remove("clear");
     }
+
+    if (data.weather[0].main == "Haze") {
+        weatherLogo.classList.remove("bx-cloud-lightning");
+        weatherLogo.classList.remove("bx-cloud-rain");
+        weatherLogo.classList.add("bx-cloud");
+        weatherLogo.classList.remove("bx-sun");
+        weatherLogo.classList.remove("bx-cloud-drizzle");
+        body.classList.remove('storm')
+        body.classList.add('mist')
+        body.classList.remove("rain");
+        body.classList.remove("clouds");
+        body.classList.remove("clear");
+    }
+
 }
