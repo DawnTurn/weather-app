@@ -127,5 +127,4 @@ async function checkWeather(cityName){
         body.classList.remove("clouds");
         body.classList.remove("clear");
     }
-    
 }
