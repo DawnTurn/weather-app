@@ -15,7 +15,7 @@ body{
     color: white;
     display: flex;
     flex-direction: row-reverse;
-    background: linear-gradient(to bottom, rgb(1, 69, 129), rgb(0, 27, 50));
+    background: linear-gradient(to bottom, rgb(0, 78, 145), rgb(0, 25, 46));
 }
 
 .weather{
@@ -244,7 +244,7 @@ nav{
 }
 
 .weather-type i{
-    font-size: 2rem;
+    font-size: 3rem;
     color: #a9d7ff;
 }
 

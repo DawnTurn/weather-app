@@ -12,6 +12,7 @@ const input = document.querySelector('#text')
 const search = document.querySelector('.bx-search')
 const weatherDesc = document.querySelector('.weather-desc')
 const body = document.querySelector('body')
+const weatherLogo = document.querySelector('.weather-type i')
 
 setInterval(() => {
   let currentTime = new Date();
@@ -73,14 +74,17 @@ async function checkWeather(cityName){
     weatherDesc.innerHTML = data.weather[0].main
 
     if(data.weather[0].main == 'Clouds'){
+        weatherLogo.classList.add('bx-cloud')
         body.classList.add('clouds')
         body.classList.remove('rain')
         body.classList.remove("clears");
         body.classList.remove("storm");
         body.classList.remove("mist");
+
     }
 
     if(data.weather[0].main == 'Rain'){
+        weatherLogo.classList.add("bx-cloud-rain");
         body.classList.add('rain')
         body.classList.remove('clouds')
         body.classList.remove("clears");
@@ -89,6 +93,7 @@ async function checkWeather(cityName){
     }
 
     if (data.weather[0].main == "Clear") {
+        weatherLogo.classList.add("bx-sun");
         body.classList.add('clears')
         body.classList.remove("rain");
         body.classList.remove("clouds");
@@ -97,6 +102,7 @@ async function checkWeather(cityName){
     }
 
     if (data.weather[0].main == "Drizzle") {
+        weatherLogo.classList.add("bx-cloud-drizzle");
         body.classList.add("rain");
         body.classList.remove("clouds");
         body.classList.remove("clear");
@@ -105,6 +111,7 @@ async function checkWeather(cityName){
     }
 
     if (data.weather[0].main == "Mist") {
+        weatherLogo.classList.add("bx-cloud");
         body.classList.add('mist')
         body.classList.remove("rain");
         body.classList.remove("clouds");
@@ -113,6 +120,7 @@ async function checkWeather(cityName){
     }
 
     if (data.weather[0].main == "Thunderstorm") {
+        weatherLogo.classList.add("bx-cloud-lightning");
         body.classList.add('storm')
         body.classList.remove('mist')
         body.classList.remove("rain");
