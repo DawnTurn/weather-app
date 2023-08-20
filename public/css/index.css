@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    height: 100vh;
+    background: linear-gradient(0deg, #00101ea6, #00101ea6), url(../images/SL-042221-42420-09.jpg);
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.container{
+    height: 100%;
+}
+
+nav{
+    padding: 2em 3em;
+}
+
+nav ul{
+    list-style: none;
+    display: flex;
+    gap: 3em;
+    justify-content: end;
+    align-items: center;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: #a9d7ff;
+    background: #002950c6;
+    padding: .8em 1.5em;
+    border-radius: .5em;
+}
+
+.hero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+}
+
+.hero h1{
+    font-size: 3rem;
+    font-weight: 500;
+    color: #a9d7ff;
+    text-align: center;
+}
+
+.hero h3{
+    font-size: 1.3rem;
+    font-weight: 200;
+    margin-top: 1em;
+}

@@ -105,7 +105,7 @@ nav{
 
 .search input{
     padding: 1em;
-    font-size: 1.2rem;
+    font-size: 1rem;
     outline: none;
     border: none;
     background: none;
@@ -122,11 +122,12 @@ nav{
     color: var(--paragh-);
     transition: .3s;
     pointer-events: none;
+    font-size: .8rem;
 }
 
 .search i{
     position: absolute;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     top: 50%;
     right: 1%;
     transform: translate(-1%, -50%);
@@ -143,7 +144,8 @@ nav{
 .search input:focus ~ .label,
 .search input:valid ~ .label{
     transform: translate(-2%, -50%) translateY(-35px);
-    font-size: .7rem;
+    font-size: .55rem;
+    color: #a9d7ff;
 }
 
 .search input:valid ~ i.bx-search{
@@ -158,7 +160,7 @@ nav{
 }
 
 .weather-detail-container h3{
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 400;
 }
 
@@ -181,6 +183,7 @@ nav{
 
 .weather-detail p{
     color: var(--paragh-);
+    font-size: .8rem;
 }
 
 .container{
@@ -198,7 +201,7 @@ nav{
 }
 
 .head h1{
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 500;
 }
 
@@ -214,7 +217,7 @@ nav{
 .digital-clock{
     display: flex;
     gap: .3em;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 400;
     color: #a9d7ff;
 }
@@ -226,12 +229,12 @@ nav{
 }
 
 .weather-info h1{
-    font-size: 7rem;
+    font-size: 6rem;
     font-weight: 400;
 }
 
 .weather-info h2{
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 200;
     color: #a9d7ff;
 }
@@ -249,7 +252,7 @@ nav{
 }
 
 .weather-type h3{
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 300;
     color: #a9d7ff;
 }
