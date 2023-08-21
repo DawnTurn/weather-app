@@ -11,162 +11,89 @@ const User = require('./models/user')
 
 //Password Handler 
 const bcrypt = require('bcrypt')
+const { error } = require('console')
 const bodyParser = require('express').json;
 
 app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static(path.join(__dirname, "/public")));
 app.use(bodyParser());
 
-app.post("/signup",  (req, res) => {
+app.post("/signup", async (req, res) => {
+  const { name, email, password } = req.body;
 
-    console.log(req.body)
-
-    let name = req.body.name;
-    let email = req.body.email;
-    let password = req.body.password;
-
-    name = name.trim()
-    email = email.trim()
-    password = password.trim()
-
-    if (name == "" || email == "" || password == "") {
-      res.json({
-        status: "FAILED",
-        message: "Empty input fields!",
-      });
-    } else if (!/^[a-zA-Z]*$/.test(name)) {
-      res.json({
-        status: "FAILED",
-        message: "Invalid Name Entered!",
-      });
+  try {
+    if (name === "" || email === "" || password === "") {
+      throw new Error("Please fill all inputs");
+    } else if (name.length < 8) {
+      throw new Error("Name should contain more than 8 characters");
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      res.json({
-        status: "FAILED",
-        message: "Invalid email Entered!",
-      });
+      throw new Error("Invalid email entered");
     } else if (password.length < 8) {
-      res.json({
-        status: "FAILED",
-        message: "Password is too short",
-      });
+      throw new Error("Password is too short");
     } else {
-      //checking ig user already exist
-      User.find({ email })
-        .then((result) => {
-          if (result.length) {
-            //A user already exist
-            res.json({
-              status: "Failed",
-              message: "User with the provided email already exists",
-            });
-          } else {
-            // Try to create new user
+      // Checking if user already exists
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        throw new Error("User with the provided email already exists");
+      }
 
-            //password handling
-            const saltRounds = 10;
-            bcrypt
-              .hash(password, saltRounds)
-              .then((hashedPassword) => {
-                const newUser = new User({
-                  name,
-                  email,
-                  password: hashedPassword,
-                });
+      // Hash the password
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-                newUser
-                  .save()
-                  .then((result) => {
-                    // res.json({
-                    //   status: "SUCCESS",
-                    //   message: "signup successful",
-                    //   data: result,
-                    // });
-                    res.redirect('./public/login.html')
-                  })
-                  .catch((err) => {
-                    res.json({
-                      status: "FAILED",
-                      message: "An error occurred while saving user account!",
-                    });
-                  });
-              })
-              .catch((err) => {
-                res.json({
-                  status: "FAILED",
-                  message: "An error occurred while hashing password!",
-                });
-              });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          res.join({
-            status: "FAILED",
-            message: "An error occured while checking for existing user!",
-          });
-        });
+      const newUser = new User({
+        name,
+        email,
+        password: hashedPassword,
+      });
+
+      // Save the new user
+      await newUser.save();
+
+      res.json({
+        status: "SUCCESS",
+        message: "User account created successfully",
+      });
     }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      status: "FAILED",
+      message: error.message,
+    });
+  }
 });
 
+  app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
 
-app.post('/login', (req, res) => {
+    try {
+      if (!email || !password) {
+        throw new Error("Please provide both email and password");
+      }
 
-    console.log(req.body)
+      const user = await User.findOne({ email });
 
-    let email = req.body.email;
-    let password = req.body.password;
+      if (!user) {
+        throw new Error("Invalid credentials");
+      }
 
-    email = email.trim();
-    password = password.trim();
+      const passwordMatch = await bcrypt.compare(password, user.password);
 
-    if (email == "" || password == "") {
-      res.json({
+      if (!passwordMatch) {
+        throw new Error("Invalid password");
+      }
+
+      res.redirect("./public/home.html");
+    } catch (error) {
+      console.error(error);
+      res.status(400).json({
         status: "FAILED",
-        message: "Empty credentials supplied",
+        message: error.message,
       });
-    } else {
-      ///check if user exist
-      User.find({ email })
-        .then((data) => {
-          if (data.length) {
-            //user exists
-
-            const hashedPassword = data[0].password;
-            bcrypt
-              .compare(password, hashedPassword)
-              .then((result) => {
-                if (result) {
-                  //password match
-                  res.redirect("./public/home.html");
-                } else {
-                  res.join({
-                    status: "FAILED",
-                    mesaage: "Invalid password entered",
-                  });
-                }
-              })
-              .catch((err) => {
-                res.json({
-                  status: "FAILED",
-                  message: "An error occurred while comparing passwords",
-                });
-              });
-          } else {
-            res.json({
-              status: "FAILED",
-              message: "Invalid credentials ",
-            });
-          }
-        })
-        .catch((err) => {
-          res.json({
-            status: "FAILED",
-            message: "An error occurred while checking for existing user",
-          });
-        });
     }
+  });
 
-})
 
 
 app.get('/', (req, res) => {

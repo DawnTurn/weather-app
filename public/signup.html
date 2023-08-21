@@ -14,7 +14,7 @@
     <div class="container">
         <h2>Signup</h2>
 
-        <form action="/signup" method="POST">
+        <form id="signup-form">
             <div class="input-box">
                 <input name="name" type="text" id="name" required>
                 <label for="name">Username</label>
@@ -39,9 +39,10 @@
             <div class="line"></div>
 
             <p>Already have an account? <a href="/login">Sign in</a></p>
+            <p class="message"></p>
         </form>
     </div>
 
-    <script src="/public/js/login.js"></script>
+    <script src="/public/js/signup.js"></script>
 </body>
 </html>
