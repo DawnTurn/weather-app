@@ -36,15 +36,17 @@ signupForm.addEventListener("submit", async (event) => {
         const data = await response.json();
 
         if (response.ok) {
-        // Successful signup
             errorMessage.textContent = "User account created successfully";
             errorMessage.style.color = "green";
-        // You can redirect to the login page or perform any other action here
-        } else {
+            window.location.href = '/login'
+        } 
+        
+        else {
         // Signup failed
-        errorMessage.textContent = data.message;
-        errorMessage.style.color = "red";
+            errorMessage.textContent = data.message;
+            errorMessage.style.color = "red";
         }
+        
     } catch (error) {
         console.error("An error occurred:", error);
         errorMessage.textContent =
