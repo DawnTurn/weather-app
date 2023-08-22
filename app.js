@@ -64,35 +64,38 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-  app.post("/login", async (req, res) => {
-    const { email, password } = req.body;
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
 
-    try {
-      if (!email || !password) {
-        throw new Error("Please provide both email and password");
-      }
-
-      const user = await User.findOne({ email });
-
-      if (!user) {
-        throw new Error("Invalid credentials");
-      }
-
-      const passwordMatch = await bcrypt.compare(password, user.password);
-
-      if (!passwordMatch) {
-        throw new Error("Invalid password");
-      }
-
-      res.redirect("./public/home.html");
-    } catch (error) {
-      console.error(error);
-      res.status(400).json({
-        status: "FAILED",
-        message: error.message,
-      });
+  try {
+    if (!email || !password) {
+      throw new Error("Please provide both email and password");
     }
-  });
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      throw new Error("Invalid credentials");
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      throw new Error("Invalid password");
+    }
+
+    res.status(200).json({
+      status: "SUCCESS",
+      message: "Login successful",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      status: "FAILED",
+      message: error.message,
+    });
+  }
+});
 
 
 

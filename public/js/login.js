@@ -17,8 +17,8 @@ unSeePasswordBtn.addEventListener('click', () => {
     unSeePasswordBtn.classList.remove('see')
 })
 
-loginForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
+loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -38,15 +38,20 @@ loginForm.addEventListener("submit", async (event) => {
 
       if (response.ok) {
         // Login successful, redirect to home page or perform other actions
-        window.location.href = "./public/home.html";
+        errorMessage.textContent = "login Successful";
+        errorMessage.style.color = "green";
+        window.location.href = './public/home.html'
+
       } else {
         // Login failed, display error message
         errorMessage.textContent = data.message;
         errorMessage.style.color = "red";
       }
     } catch (error) {
-      console.error("An error occurred:", error);
-    } finally {
-      submitButton.disabled = false;
-    }
+        console.error("An error occurred:", error);
+        errorMessage.textContent = "An error occurred while processing your request.";
+        errorMessage.style.color = "red";
+      } finally {
+          submitButton.disabled = false;
+        }
 });

@@ -165,5 +165,3 @@ async function checkWeather(cityName) {
     body.classList.remove("clear");
   }
 }
-
-console.log(data[0].name)

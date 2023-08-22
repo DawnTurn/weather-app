@@ -38,7 +38,7 @@ signupForm.addEventListener("submit", async (event) => {
         if (response.ok) {
             errorMessage.textContent = "User account created successfully";
             errorMessage.style.color = "green";
-            window.location.href = '/login'
+            // window.location.href = '/login'
         } 
         
         else {
