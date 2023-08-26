@@ -103,6 +103,12 @@ nav{
     position: relative;
 }
 
+.search-container p{
+    color: red;
+    font-weight: 200;
+    font-size: .8rem;
+}
+
 .search input{
     padding: 1em;
     font-size: 1rem;

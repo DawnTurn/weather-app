@@ -14,6 +14,7 @@ const weatherDesc = document.querySelector(".weather-desc");
 const body = document.querySelector("body");
 const weatherLogo = document.querySelector(".weather-type i");
 const desc = document.querySelector(".desc");
+const error = document.querySelector('.error')
 
 setInterval(() => {
   let currentTime = new Date();
@@ -58,21 +59,47 @@ input.addEventListener("keyup", (e) => {
 });
 
 const apiKey = "7ce1e0c55ed47ebbf7aba4a7c041f56c";
-const apiUrl =
-  "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
 
 async function checkWeather(cityName) {
   const response = await fetch(apiUrl + cityName + `&appid=${apiKey}`);
   let data = await response.json();
 
-  city.innerHTML = data.name;
-  temp.innerHTML = Math.round(data.main.temp) + "°C";
-  humidity.innerHTML = data.main.humidity + "%";
-  wind.innerHTML = data.wind.speed + " km/h";
-  cloud.innerHTML = data.clouds.all + "%";
-  pressure.innerHTML = data.main.pressure + " hPa";
-  weatherDesc.innerHTML = data.weather[0].main;
-  desc.innerHTML = data.weather[0].description;
+  if (response.status == 404) {
+    error.textContent = "invalid city name";
+    city.innerHTML = 'City'
+    temp.innerHTML = "00°C";
+    humidity.innerHTML = "00%";
+    wind.innerHTML = "00km/h";
+    cloud.innerHTML = "00%";
+    pressure.innerHTML = "00hPa";
+    weatherDesc.innerHTML = "-------";
+    desc.innerHTML = "------";
+    weatherLogo.classList.remove("bx-cloud");
+    weatherLogo.classList.remove("bx-cloud-rain");
+    weatherLogo.classList.remove("bx-sun");
+    weatherLogo.classList.remove("bx-cloud-drizzle");
+    weatherLogo.classList.remove("bx-cloud-lightning");
+    body.classList.remove("clouds");
+    body.classList.remove("rain");
+    body.classList.remove("clears");
+    body.classList.remove("storm");
+    body.classList.remove("mist");
+  }
+
+  if (response.status !== 404){
+    city.innerHTML = data.name;
+    temp.innerHTML = Math.round(data.main.temp) + "°C";
+    humidity.innerHTML = data.main.humidity + "%";
+    wind.innerHTML = data.wind.speed + " km/h";
+    cloud.innerHTML = data.clouds.all + "%";
+    pressure.innerHTML = data.main.pressure + " hPa";
+    weatherDesc.innerHTML = data.weather[0].main;
+    desc.innerHTML = data.weather[0].description;
+    error.innerHTML = "";
+  }
+
 
   if (data.weather[0].main == "Clouds") {
     weatherLogo.classList.add("bx-cloud");
